@@ -1,10 +1,22 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
+import { router } from '@/app/router.ts';
 import '@/app/index.css';
-import App from '@/app/app';
 
-createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-        <App />
-    </StrictMode>
-);
+async function enableMocking() {
+    if (import.meta.env.PROD) {
+        return;
+    }
+
+    const { worker } = await import('@/shared/api/mocks/browser');
+    return worker.start();
+}
+
+enableMocking().then(() => {
+    createRoot(document.getElementById('root')!).render(
+        <StrictMode>
+            <RouterProvider router={router} />
+        </StrictMode>
+    );
+});

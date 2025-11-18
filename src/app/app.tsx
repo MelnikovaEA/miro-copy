@@ -11,7 +11,7 @@ export const App = () => {
         location.pathname === ROUTES.REGISTER;
     return (
         <Providers>
-            <div>
+            <div className="min-h-screen flex flex-col bg-green-100">
                 {!isAuthPage && <AppHeader />}
                 <Outlet />
             </div>

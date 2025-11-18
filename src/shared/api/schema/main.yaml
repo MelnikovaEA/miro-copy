@@ -14,3 +14,11 @@ paths:
     /boards/{boardId}:
         delete:
             $ref: './endpoints/boards.yaml#/deleteBoard'
+
+    /auth/login:
+        post:
+            $ref: './endpoints/auth.yaml#/login'
+
+    /auth/register:
+        post:
+            $ref: './endpoints/auth.yaml#/register'

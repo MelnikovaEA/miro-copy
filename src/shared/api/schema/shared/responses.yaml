@@ -5,6 +5,13 @@ UnauthorizedError:
             schema:
                 $ref: '#/schemas/Error'
 
+BadRequestError:
+    description: Bad request
+    content:
+        application/json:
+            schema:
+                $ref: '#/schemas/Error'
+
 NotFoundError:
     description: Resource not found
     content:

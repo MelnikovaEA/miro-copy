@@ -1,6 +1,7 @@
 import { rqClient } from '@/shared/api/instance.ts';
 import { type RefCallback, useCallback } from 'react';
 import type { BoardsSortOptions } from '@/features/boards-list/model/use-boards-filters.ts';
+import { keepPreviousData } from '@tanstack/react-query';
 
 type Params = {
     limit?: number;
@@ -37,6 +38,7 @@ export const useBoardsList = ({
                     Number(lastPageParams) < lastPage.totalPages
                         ? Number(lastPageParams) + 1
                         : null,
+                placeholderData: keepPreviousData,
             }
         );
 

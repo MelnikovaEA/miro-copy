@@ -14,11 +14,11 @@ interface BoardsListCardProps {
     bottomActions?: React.ReactNode;
 }
 
-export function BoardsListCard({
+export const BoardsListCard = ({
     board,
     bottomActions,
     rightTopActions,
-}: BoardsListCardProps) {
+}: BoardsListCardProps) => {
     return (
         <Card className="relative">
             {<div className="absolute top-2 right-2">{rightTopActions}</div>}
@@ -48,4 +48,4 @@ export function BoardsListCard({
             {bottomActions && <CardFooter>{bottomActions}</CardFooter>}
         </Card>
     );
-}
+};

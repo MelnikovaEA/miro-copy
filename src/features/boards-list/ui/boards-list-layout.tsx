@@ -3,19 +3,26 @@ import type { ViewMode } from '@/features/boards-list/ui/view-mode-change.tsx';
 import { Skeleton } from '@/shared/ui/kit/skeleton.tsx';
 
 export const BoardsListLayout = ({
+    sidebar,
     header,
     filters,
     children,
 }: {
-    header: React.ReactElement;
-    filters: React.ReactNode;
     children: React.ReactNode;
+    header: React.ReactNode;
+    sidebar?: React.ReactNode;
+    filters?: React.ReactNode;
 }) => {
     return (
-        <div className="container mx-auto p-4 flex flex-col gap-6">
-            {header}
-            {filters}
-            {children}
+        <div className="container mx-auto">
+            <div className="flex gap-4">
+                {sidebar}
+                <div className="flex-1 p-4 flex flex-col gap-6">
+                    {header}
+                    {filters}
+                    {children}
+                </div>
+            </div>
         </div>
     );
 };
@@ -85,8 +92,8 @@ export const BoardsListLayoutContent = ({
     hasCursor,
 }: {
     mode: ViewMode;
-    renderList: () => React.ReactNode;
-    renderGrid: () => React.ReactNode;
+    renderList?: () => React.ReactNode;
+    renderGrid?: () => React.ReactNode;
     children?: React.ReactNode;
     isEmpty?: boolean;
     isPending?: boolean;
@@ -100,10 +107,10 @@ export const BoardsListLayoutContent = ({
             {isPending && <div className="text-center py-10">Загрузка...</div>}
 
             {mode === 'list' && renderList && (
-                <BoardsListListLayout>{renderList?.()}</BoardsListListLayout>
+                <BoardsListLayoutList>{renderList?.()}</BoardsListLayoutList>
             )}
             {mode === 'cards' && renderGrid && (
-                <BoardsListCardsLayout>{renderGrid?.()}</BoardsListCardsLayout>
+                <BoardsListLayoutCards>{renderGrid?.()}</BoardsListLayoutCards>
             )}
 
             {!isPending && children}
@@ -136,7 +143,7 @@ export const BoardsListLayoutContent = ({
     );
 };
 
-export const BoardsListCardsLayout = ({
+export const BoardsListLayoutCards = ({
     children,
 }: {
     children?: React.ReactNode;
@@ -148,10 +155,27 @@ export const BoardsListCardsLayout = ({
     );
 };
 
-export const BoardsListListLayout = ({
+export const BoardsListLayoutList = ({
     children,
 }: {
     children?: React.ReactNode;
 }) => {
     return <div className="flex flex-col gap-2">{children}</div>;
+};
+
+export const BoardsListLayoutContentGroups = ({
+    groups,
+}: {
+    groups: { title: string; items: React.ReactNode }[];
+}) => {
+    return (
+        <div className="flex flex-col gap-2">
+            {groups.map((group) => (
+                <div key={group.title}>
+                    <div className="text-lg font-bold">{group.title}</div>
+                    {group.items}
+                </div>
+            ))}
+        </div>
+    );
 };

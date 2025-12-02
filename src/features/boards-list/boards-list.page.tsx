@@ -19,6 +19,7 @@ import { BoardsSortSelect } from '@/features/boards-list/ui/boards-sort-select.t
 import { BoardsSearchInput } from '@/features/boards-list/ui/boards-search-input.tsx';
 import { BoardItem } from '@/features/boards-list/compose/board-item.tsx';
 import { BoardCard } from '@/features/boards-list/compose/board-card.tsx';
+import { BoardsSidebar } from '@/features/boards-list/ui/boards-sidebar.tsx';
 
 const BoardsListPage = () => {
     const [viewMode, setViewMode] = useState<ViewMode>('list');
@@ -33,6 +34,7 @@ const BoardsListPage = () => {
 
     return (
         <BoardsListLayout
+            sidebar={<BoardsSidebar />}
             header={
                 <BoardsListLayoutHeader
                     title="Доски"

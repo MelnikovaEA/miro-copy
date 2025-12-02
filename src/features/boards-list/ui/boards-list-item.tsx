@@ -19,11 +19,11 @@ interface BoardsListItemProps {
     menuActions?: React.ReactNode;
 }
 
-export function BoardsListItem({
+export const BoardsListItem = ({
     board,
     rightActions,
     menuActions,
-}: BoardsListItemProps) {
+}: BoardsListItemProps) => {
     return (
         <div className="flex items-center gap-4 p-4 border-b last:border-b-0">
             <div className="flex-grow min-w-0">
@@ -66,4 +66,4 @@ export function BoardsListItem({
             </div>
         </div>
     );
-}
+};
